@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio-13" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fb9bc9e1-beb2-42b9-bc3d-d904a185731c">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Curso Udemy"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[amFzcGVyY3Vyc28uZW5kZXJlY29zIEFTICwyNjksMTkyLGJlOTJiOTA1LTlmMTMtNGFiMy04Mzlh
+LWFiZjcwNDYxYTE5NTtqYXNwZXJjdXJzby5mdW5jaW9uYXJpb3MgQVMgLDUzLDMxLDdhMmNlMmMx
+LWJhYmQtNDQzYy04NWQ3LTNjMGM1Y2JlODg1Njs=]]>
+	</property>
+	<style name="CORES_ALTERNADAS" mode="Opaque" backcolor="#FCFCFC">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#CCFFFF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="NOME" class="java.lang.String"/>
+	<parameter name="SALARIO" class="java.math.BigDecimal"/>
+	<parameter name="IMAGEM_DIRETORIO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PRODUTO" class="com.mballem.curso.jasper.spring.entity.Produto" isForPrompting="false">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT jaspercurso.funcionarios.nome,
+	jaspercurso.enderecos.cidade,
+	jaspercurso.enderecos.uf
+FROM jaspercurso.funcionarios
+	INNER JOIN jaspercurso.enderecos ON 
+	 jaspercurso.funcionarios.id_endereco = jaspercurso.enderecos.id_endereco]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="funcionarios"/>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="cidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="enderecos"/>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="uf"/>
+		<property name="com.jaspersoft.studio.field.label" value="uf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="enderecos"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="50" uuid="3d85d414-31f6-4994-8101-9501b8edddac"/>
+				<imageExpression><![CDATA[$P{IMAGEM_DIRETORIO} + "images/logo-555x50.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="CORES_ALTERNADAS" x="0" y="50" width="278" height="30" uuid="f1d618e5-0d63-45cd-b134-4a2ca2bd4603"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRODUTO}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00;¤ -#,##0.00">
+				<reportElement style="CORES_ALTERNADAS" x="280" y="50" width="277" height="30" uuid="81673874-895f-4f60-82a3-f68d02601a54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PRODUTO}.getDescricao()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>
